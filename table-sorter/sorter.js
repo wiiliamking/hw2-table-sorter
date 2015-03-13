@@ -1,9 +1,9 @@
-var order = [];
-
 window.onload = function() {
 	var tables = getAllTables();
 	makeAllTablesSortable(tables);
 }
+
+var order = [];
 
 function getAllTables() {
 	var returnTables = document.getElementsByTagName('table');
@@ -12,13 +12,14 @@ function getAllTables() {
 
 function makeAllTablesSortable(tables) {
 	for (var index = 0; index < tables.length; ++index) {
+        if (!tables[index].tHead) continue;
         order[index] = [];
         var num = 0;
         for (var i = 0; i < tables[index].tBodies.length; ++i) {
             for (var j = 0; j < tables[index].tBodies[i].rows.length; ++j)
                 order[index].push(num++);
         }
-        tr = tables[index].tHead.rows[0];
+        var tr = tables[index].tHead.rows[0];
         for (var num = 0; num < tr.cells.length; ++num) {
             var triangle = document.createElement("img");
             triangle.className = "normal";
